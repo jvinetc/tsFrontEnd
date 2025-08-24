@@ -1,0 +1,73 @@
+import React from 'react';
+import { EnvelopeIcon } from '@heroicons/react/24/outline';
+import { FaLinkedin, FaGithub } from 'react-icons/fa6';
+import { Link, useLocation } from 'react-router-dom';
+import { useUser } from '../context/UserContext';
+import ImageButton from './ImageButton';
+
+type SideBarProps = {
+    sidebarOpen: boolean;
+}
+
+const SideBar: React.FC<SideBarProps> = ({ sidebarOpen }) => {
+    const { isLoggedIn, user } = useUser();
+    const location = useLocation();
+    const isActive = (path: string) =>
+        location.pathname === path
+            ? 'text-blue-600 font-semibold'
+            : 'text-gray-700 dark:text-gray-300 hover:text-blue-500';
+    return (
+        <aside className={`fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-800 shadow-md transform transition-transform duration-300 z-40 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:static`}>
+            {!isLoggedIn ?
+                <div className="p-4 flex flex-col items-center space-y-2">
+                    <div className="flex items-end h-[8rem]">
+                        <h1 className="text-[8rem] font-extrabold text-blue-600 leading-none">E</h1>
+                        <p className="text-2xl font-semibold text-gray-700 dark:text-gray-300 ml-2 mb-1">nvíos</p>
+                    </div>
+                    <div className="flex items-end h-[8rem]">
+                        <h1 className="text-[8rem] font-extrabold text-blue-600 leading-none">T</h1>
+                        <p className="text-2xl font-semibold text-gray-700 dark:text-gray-300 ml-2 mb-1">odo</p>
+                    </div>
+                    <div className="flex items-end h-[8rem]">
+                        <h1 className="text-[8rem] font-extrabold text-blue-600 leading-none">S</h1>
+                        <p className="text-2xl font-semibold text-gray-700 dark:text-gray-300 ml-2 mb-1">antiago</p>
+                    </div>
+                </div>
+                : <>
+                    <div className="p-4 flex flex-col items-center space-y-2">
+                        <ImageButton />
+                        <div className="text-center">
+                            <p className="font-semibold text-lg">{user?.firstName} {user?.lastName}`</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{user?.Rol?.name?.toUpperCase()}</p>
+                            <Link to="/logout" className="block hover:text-blue-200">Cerrar sesion</Link>
+                        </div>
+                    </div>
+                    <nav className="p-4 space-y-2">
+                        <Link to="/" className={`block hover:text-blue-500 ${isActive('/')}`}>Inicio</Link>
+                        <Link to="/profile" className={`block hover:text-blue-500 ${isActive('/profile')}`}>Perfil</Link>
+                        <Link to="/drivers" className={`block hover:text-blue-500 ${isActive('/drivers')}`}>Conductores</Link>
+                        <Link to="/sells" className={`block hover:text-blue-500 ${isActive('/sells')}`}>Tiendas</Link>
+                        <Link to="/stops" className={`block hover:text-blue-500 ${isActive('/stops')}`}>Puntos</Link>
+                        <Link to="/configuration" className={`block hover:text-blue-500 ${isActive('/configuration')}`}>Configuraciones</Link>
+                    </nav>
+                </>}
+            {/* Redes sociales y contacto */}
+            <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+                <div className="flex justify-center space-x-4 mb-2">
+                    <Link to="https://github.com/jvinetc" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-blue-500">
+                        <FaGithub className='h-6 w-6' />
+                    </Link>
+                    <Link to="mailto:jvinetc@gmail.com" className="text-gray-500 hover:text-blue-500">
+                        <EnvelopeIcon className="h-6 w-6" />
+                    </Link>
+                    <Link to="https://linkedin.com/in/jvinetc" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-blue-500">
+                        <FaLinkedin className='h-6 w-6' />
+                    </Link>
+                </div>
+                <p className="text-xs text-center text-gray-400 dark:text-gray-500">© 2025 AppEnvios</p>
+            </div>
+        </aside>
+    )
+}
+
+export default SideBar
