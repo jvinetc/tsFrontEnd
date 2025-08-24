@@ -1,4 +1,3 @@
-import React from 'react'
 import DriversTable from '../components/DriversTable'
 
 const Drivers = () => {

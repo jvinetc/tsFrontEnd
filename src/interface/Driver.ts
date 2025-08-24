@@ -11,13 +11,13 @@ export interface IDriver {
     status?: string,
     createAt?: Date,
     updateAt?: Date,
-    User: IUser | null
-    Comunas: IComuna[] | null;
-    vencimientoLiceciaConducir: string;
-    vencimientoPermisoCirculacion: string;
-    vencimientoRevicionTecnica: string;
+    User?: IUser | null | undefined;
+    Comunas?: IComuna[] | null | undefined;
+    vencimientoLiceciaConducir?: string;
+    vencimientoPermisoCirculacion?: string;
+    vencimientoRevicionTecnica?: string;
 }
 export interface ResponseList {
-    drivers: IDriver[];
+    drivers: IDriver[] | null | undefined; 
     count: number;
 }

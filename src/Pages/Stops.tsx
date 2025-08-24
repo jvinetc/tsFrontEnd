@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
-import { useUser } from '../context/UserContext';
+import { useEffect } from 'react'
+//import { useUser } from '../context/UserContext';
 
 const Stops = () => {
-  const { token } = useUser();
+  //const { token } = useUser();
   useEffect(() => {
     const loadStops = async () => {
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import type { responseChart } from '../interface/Stop';
 

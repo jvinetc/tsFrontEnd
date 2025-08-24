@@ -1,4 +1,3 @@
-import React from 'react';
 import '../styles/GlobalSpinner.css';
 import { useLoading } from '../context/LoadingContext';
 

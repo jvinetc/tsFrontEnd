@@ -58,10 +58,12 @@ const DriverForm = () => {
     setLoading(true);
     try {
       const { data: d, status } = await getDriveById(Number(id), token)
-      if (!d || status !== 200 || !d.liceciaConducir || !d.permisoCirculacion || !d.revicionTecnica) return;
+      if (!d || status !== 200 || !d.liceciaConducir || !d.permisoCirculacion || !d.revicionTecnica
+        || !d.vencimientoLiceciaConducir || !d.vencimientoPermisoCirculacion || !d.vencimientoRevicionTecnica
+      ) return;
       setDriver(d);
       setDriverPreview(d);
-      setUser(d.User);
+      setUser(d.User ?? null);
       setExpirationPreview([d.vencimientoLiceciaConducir, d.vencimientoPermisoCirculacion, d.vencimientoRevicionTecnica]);
       setExpiration([d.vencimientoLiceciaConducir, d.vencimientoPermisoCirculacion, d.vencimientoRevicionTecnica]);
     } catch (error) {
@@ -154,18 +156,18 @@ const DriverForm = () => {
             return;
           } else {
             formData.append(`expiration${i + 1}`, expiration[i])
-            formData.append(`file${i+1}`, f);
+            formData.append(`file${i + 1}`, f);
             val += 1;
           }
         })
       }
-      if (val===0) {
+      if (val === 0) {
         showMessage({ text: 'Nada se Actualizo', type: 'info' });
         console.log('nada se actualizo');
         return;
       }
-      const {data, status}= await updateDriver(token, formData, Number(driver?.id));
-      if(status!==200 || !data){
+      const { data, status } = await updateDriver(token, formData, Number(driver?.id));
+      if (status !== 200 || !data) {
         showMessage({ text: 'Nada se Actualizo', type: 'info' });
         return;
       }
@@ -174,7 +176,7 @@ const DriverForm = () => {
     } catch (error) {
       console.log(error);
       showMessage({ text: 'Algo fallo, intentalo mas tarde', type: 'error' });
-    }finally{
+    } finally {
       setLoading(false);
     }
   }
@@ -248,8 +250,11 @@ const DriverForm = () => {
           className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white h-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
           onChange={(e) => {
             const selectedIds = Array.from(e.target.selectedOptions).map((o) => Number(o.value));
-            const selectedComunas = comunas.filter((c) => selectedIds.includes(c.id));
-            setDriver({ ...driver, Comunas: selectedComunas });
+            const selectedComunas = comunas.filter((c) => selectedIds.includes(c.id ?? 0));
+            if (selectedComunas.length >0) {
+              setDriver({ ...driver, Comunas: selectedComunas });
+            }
+
           }}
         >
           {comunas.map((c) => {

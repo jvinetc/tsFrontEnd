@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useMessage } from '../context/MessageContext ';
 
 const GlobalMessage = () => {
