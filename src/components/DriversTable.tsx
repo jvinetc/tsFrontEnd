@@ -25,7 +25,7 @@ const DriversTable = () => {
                 setLoading(true);
                 if (filters && filters.length < 3) return;
                 const { data, status } = await listDrivers({ token, search: filters, page, limit });
-                if (status !== 200 || !data) {
+                if (status !== 200 || !data || !data.drivers) {
                     showMessage({ text: 'Error al cargar los datos, intente mas tarde', type: 'info' });
                     return;
                 }
@@ -163,9 +163,9 @@ const DriversTable = () => {
                             </td>
                             <td className="p-2">
                                 <ul>
-                                    <li>{new Date(d.vencimientoLiceciaConducir).toLocaleDateString('Es-es').split('T')[0]}</li>
-                                    <li>{new Date(d.vencimientoPermisoCirculacion).toLocaleDateString('Es-es').split('T')[0]}</li>
-                                    <li>{new Date(d.vencimientoRevicionTecnica).toLocaleDateString('Es-es').split('T')[0]}</li>
+                                    <li>{d.vencimientoLiceciaConducir &&new Date(d.vencimientoLiceciaConducir).toLocaleDateString('Es-es').split('T')[0]}</li>
+                                    <li>{d.vencimientoPermisoCirculacion && new Date(d.vencimientoPermisoCirculacion).toLocaleDateString('Es-es').split('T')[0]}</li>
+                                    <li>{d.vencimientoRevicionTecnica && new Date(d.vencimientoRevicionTecnica).toLocaleDateString('Es-es').split('T')[0]}</li>
                                 </ul>
                             </td>
                             <td className="p-2 flex gap-2">
