@@ -101,9 +101,10 @@ const DriverForm = () => {
     try {
       const formData = new FormData();
       setLoading(true);
+      console.log(user, driver,file);
       if (!user || !user.firstName?.trim() || !user.lastName?.trim()
         || !user.email?.trim() || !driver || !driver.patente?.trim()
-        || driver.Comunas?.length === 0 || !file || file.length <= 3 ||
+        || driver.Comunas?.length === 0 || !file || file.length < 3 ||
         !expiration || expiration.length < 3) {
         showMessage({ text: 'Todos los campos son requeridos.', type: 'error' });
         return;
