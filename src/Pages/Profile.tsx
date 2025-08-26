@@ -29,7 +29,7 @@ const Profile = () => {
       {/* Información detallada */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <InfoCard label="Teléfono" value={user?.phone} />
-        <InfoCard label="Rol" value={user?.Rol?.name} />
+        <InfoCard label="Rol" value={user?.Role?.name} />
         <InfoCard label="Estado" value={user?.state} />
       </div>
 
