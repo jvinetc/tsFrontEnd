@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLoading } from '../context/LoadingContext';
 import { useUser } from '../context/UserContext';
 import type { ISell } from '../interface/Sell';
