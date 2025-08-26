@@ -2,20 +2,22 @@ import  { useEffect, useState } from 'react'
 import ChartCard from '../components/ChartCard'
 import { listStopChart, listStopsComunas } from '../api/Stops';
 import type { responseChart } from '../interface/Stop';
+import { useUser } from '../context/UserContext';
 
 
 const Home = () => {
   const [data1, setData1] = useState<responseChart[] | undefined>(undefined);
   const [data2, setData2] = useState<responseChart[] | undefined>(undefined);
+  const { token } = useUser();
   useEffect(() => {
     const loadData = async () => {
       try {
-        const { data, status } = await listStopChart();
+        const { data, status } = await listStopChart(token);
         if (status === 200 && data) {
           setData2(data);
           //console.log(data)
         }
-        const { data: dat, status: sta } = await listStopsComunas();
+        const { data: dat, status: sta } = await listStopsComunas(token);
         if (sta === 200 && dat) {
           setData1(dat);
         }

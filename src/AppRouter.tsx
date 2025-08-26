@@ -13,6 +13,8 @@ import PaymentValidate from "./Pages/PaymentValidate";
 import NotFound from "./Pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DriverForm from "./components/DriverForm";
+import Prices from "./Pages/Prices";
+import RateForm from "./components/RateForm";
 
 
 function AppRouter() {
@@ -32,6 +34,9 @@ function AppRouter() {
           <Route path="drivers/edit/:id" element={<ProtectedRoute><DriverForm /></ProtectedRoute>} />
           <Route path="sells" element={<ProtectedRoute><Sells /></ProtectedRoute>} />
           <Route path="stops" element={<ProtectedRoute><Stops /></ProtectedRoute>} />
+          <Route path="prices" element={<ProtectedRoute><Prices /></ProtectedRoute>} />
+          <Route path="prices/create" element={<ProtectedRoute><RateForm /></ProtectedRoute>} />
+          <Route path="prices/edit/:id" element={<ProtectedRoute><RateForm /></ProtectedRoute>} />
           <Route path="valida_pago" element={<PaymentValidate />} />
           <Route path="*" element={<NotFound />} />
         </Route>

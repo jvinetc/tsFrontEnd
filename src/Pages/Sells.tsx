@@ -1,7 +1,8 @@
+import SellTable from "../components/SellTable"
 
 const Sells = () => {
   return (
-    <div>Sells</div>
+    <SellTable/>
   )
 }
 

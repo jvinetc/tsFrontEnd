@@ -1,4 +1,5 @@
 import type { IComuna } from "./Comuna";
+import type { IUser } from "./User";
 
 export interface ISell{
     id?:number;
@@ -14,4 +15,10 @@ export interface ISell{
     createAt?: Date;
     updateAt?: Date;
     Comuna?: IComuna;
+    User?:IUser;
+}
+
+export interface ResponseList{
+    count:number;
+    sells: ISell[] | undefined | null;
 }

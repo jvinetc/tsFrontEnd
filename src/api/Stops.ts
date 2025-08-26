@@ -1,4 +1,4 @@
-import type { IStop, responseChart } from '../interface/Stop';
+import type { IStop, responseChart, ResponseList } from '../interface/Stop';
 import type { IUser } from '../interface/User';
 import api from './axios';
 
@@ -24,11 +24,11 @@ export const disableStop = (data: IStop, token: string) => api.put('/stop/disabl
 export const updateStop = (data: IStop, token: string) => api.put('/stop', data, {
     headers: { Authorization: `Bearer ${token}` }
 });
-export const getPays = (sellId:number, token:string) => api.get(`/stop/pays/${sellId}`, {
+export const getPays = (sellId: number, token: string) => api.get(`/stop/pays/${sellId}`, {
     headers: { Authorization: `Bearer ${token}` }
 });
 
-export const getPayDetail = (buyOrder?:string, token?:string) => api.get(`/stop/pays/detail/${buyOrder}`, {
+export const getPayDetail = (buyOrder?: string, token?: string) => api.get(`/stop/pays/detail/${buyOrder}`, {
     headers: { Authorization: `Bearer ${token}` }
 });
 export const downloadTemplate = (token: string) => api.get(`/stop/downloadTemplate`, {
@@ -38,6 +38,32 @@ export const downloadTemplate = (token: string) => api.get(`/stop/downloadTempla
     }
 });
 
-export const listStops = ()=>api.get('/stop');
-export const listStopChart=()=>api.get<responseChart[]>('/stop/chart');
-export const listStopsComunas= ()=>api.get<responseChart[]>('/stop/chart/comuna');
+export const listStops = (token: string) => api.get('/stop', {
+    headers: { Authorization: `Bearer ${token}` }
+});
+export const listStopChart = (token: string) => api.get<responseChart[]>('/stop/chart', {
+    headers: { Authorization: `Bearer ${token}` }
+});
+export const listStopsComunas = (token: string) => api.get<responseChart[]>('/stop/chart/comuna', {
+    headers: { Authorization: `Bearer ${token}` }
+});
+
+type PropsQuery = {
+    token: string, limit?: number, order?: string | '', page?: number, search?: string | ''
+}
+export const listStopsByAdmin = ({ token, limit, order, page, search }: PropsQuery) => {
+    let query: string = '';
+    if (order) {
+        query = `&order=${order}`;
+    }
+    if (search) {
+        query += `&search=${search}`
+    }
+    return api.get<ResponseList>(`/stop/byAdmin?limit=${limit}&page=${page}${query}`, {
+        headers: { Authorization: `Bearer ${token}` }
+    })
+}
+
+export const asignDriver = (token: string) => api.post('/stop/asignDriver',{}, {
+    headers: { Authorization: `Bearer ${token}` }
+})

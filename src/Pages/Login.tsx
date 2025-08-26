@@ -12,10 +12,10 @@ const Login = () => {
   const { isLoading, setLoading } = useLoading();
   const [error, setError] = useState('');
   const { setUser, setIsLoggedIn, setIsAdmin, setToken } = useUser();
-  const {showMessage} = useMessage();
-  const navigate=useNavigate();
+  const { showMessage } = useMessage();
+  const navigate = useNavigate();
 
-  const handleLogin = async ()=> {
+  const handleLogin = async () => {
     setLoading(true);
     setError('');
     try {
@@ -23,18 +23,22 @@ const Login = () => {
         showMessage({ text: 'Los campos no deben estar vacios', type: 'info' });
         return;
       }
-      const { data , status } = await login(userLogin);
+      const { data, status } = await login(userLogin);
       if (status !== 200 || !data?.user || !data?.token) {
         showMessage({ text: 'Usuario o contraseña equivocadas', type: 'error' });
         return;
       }
-      if(data.user.Rol?.name ==='admin'){setIsAdmin(true)}
+      if (data.user.Role?.name !== 'admin') {
+        showMessage({ text: 'Esta intentando ingresar a la app de administrador, vuelva a la app de cliente.', type: 'error' });
+        return;
+      }
+      setIsAdmin(true)
       setUser(data.user);
       setToken(data.token);
       sessionStorage.setItem('token', data.token);
       setIsLoggedIn(true);
-      navigate('/'); 
-    } catch(error) {
+      navigate('/');
+    } catch (error) {
       console.log(error)
       showMessage({ text: 'Error al iniciar sesion, intente mas tarde', type: 'error' });
     } finally {

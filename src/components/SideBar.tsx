@@ -38,7 +38,7 @@ const SideBar: React.FC<SideBarProps> = ({ sidebarOpen }) => {
                         <ImageButton />
                         <div className="text-center">
                             <p className="font-semibold text-lg">{user?.firstName} {user?.lastName}`</p>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">{user?.Rol?.name?.toUpperCase()}</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{user?.Role?.name?.toUpperCase()}</p>
                             <Link to="/logout" className="block hover:text-blue-200">Cerrar sesion</Link>
                         </div>
                     </div>
@@ -48,7 +48,8 @@ const SideBar: React.FC<SideBarProps> = ({ sidebarOpen }) => {
                         <Link to="/drivers" className={`block hover:text-blue-500 ${isActive('/drivers')}`}>Conductores</Link>
                         <Link to="/sells" className={`block hover:text-blue-500 ${isActive('/sells')}`}>Tiendas</Link>
                         <Link to="/stops" className={`block hover:text-blue-500 ${isActive('/stops')}`}>Puntos</Link>
-                        <Link to="/configuration" className={`block hover:text-blue-500 ${isActive('/configuration')}`}>Configuraciones</Link>
+                        <Link to="/prices" className={`block hover:text-blue-500 ${isActive('/prices')}`}>Tarifas</Link>
+                        {/* <Link to="/configuration" className={`block hover:text-blue-500 ${isActive('/configuration')}`}>Configuraciones</Link> */}
                     </nav>
                 </>}
             {/* Redes sociales y contacto */}

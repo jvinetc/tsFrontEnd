@@ -1,16 +1,8 @@
-import { useEffect } from 'react'
-//import { useUser } from '../context/UserContext';
+import StopsTable from "../components/StopsTable"
 
 const Stops = () => {
-  //const { token } = useUser();
-  useEffect(() => {
-    const loadStops = async () => {
-
-    }
-    loadStops();
-  }, []);
   return (
-    <div>Stops</div>
+    <StopsTable/>
   )
 }
 

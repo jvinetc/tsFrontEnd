@@ -19,7 +19,7 @@ export interface IUser {
     verification_token?: string;
     birthDate?: string;
     Sells?: ISell[];
-    Rol?: IRole;
+    Role?: IRole;
     Images?: ImagesData[];
 }
 
