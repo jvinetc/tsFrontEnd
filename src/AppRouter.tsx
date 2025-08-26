@@ -15,15 +15,16 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import DriverForm from "./components/DriverForm";
 import Prices from "./Pages/Prices";
 import RateForm from "./components/RateForm";
+import { useUser } from "./context/UserContext";
 
 
 function AppRouter() {
-  //const token = localStorage.getItem('token');
+  const { token } = useUser();
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<ProtectedRoute><Home /></ProtectedRoute>} />
+          <Route index element={!token ? <Login /> : <Home />} />
           <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
