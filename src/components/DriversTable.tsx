@@ -16,7 +16,6 @@ const DriversTable = () => {
     const { isLoading, setLoading } = useLoading();
     const { showMessage } = useMessage();
     const [filters, setFilters] = useState('');
-    const API_URL = import.meta.env.VITE_SERVER;
     const [page, setPage] = useState<number>(1);
     const [limit] = useState<number>(5);
     useEffect(() => {
