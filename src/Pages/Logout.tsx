@@ -10,7 +10,7 @@ const Logout = () => {
   setUser(undefined);
   setIsLoggedIn(false);
   sessionStorage.removeItem('token');
-  navigate('/login');
+  navigate('/');
 }, []);
   return (
     <div>Logout</div>
