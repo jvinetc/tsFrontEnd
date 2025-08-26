@@ -2,7 +2,6 @@ import { useUser } from '../context/UserContext';
 
 const Profile = () => {
   const { user } = useUser();
-  const API_URL = import.meta.env.VITE_SERVER;
 
   const InfoCard = ({ label, value }: { label: string; value?: string }) => (
     <div className="bg-white dark:bg-gray-700 rounded-lg p-4 shadow">
