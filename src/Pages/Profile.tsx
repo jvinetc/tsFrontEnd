@@ -16,7 +16,7 @@ const Profile = () => {
       {/* Encabezado */}
       <div className="flex items-center gap-4">
         <img
-          src={user?.Images && user?.Images?.length > 0 ? `${API_URL}/uploads/${user?.Images[0].name}` : '/default-avatar.png'}
+          src={user?.Images && user?.Images?.length > 0 ? user?.Images[0].url : '/default-avatar.png'}
           alt="Foto de perfil"
           className="w-24 h-24 rounded-full border-2 border-blue-500 object-cover"
         />
