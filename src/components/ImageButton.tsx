@@ -9,7 +9,6 @@ const ImageButton = () => {
     const { setLoading } = useLoading();
     const { token, user, setUser } = useUser();
     const { showMessage } = useMessage();
-    const API_URL = import.meta.env.VITE_SERVER;
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [preview, setPreview] = useState<string | null>(null);
 
@@ -48,7 +47,7 @@ const ImageButton = () => {
                 src={
                     preview ||
                     (user?.Images?.length
-                        ? `${API_URL}/uploads/${user.Images[0].name}`
+                        ? user.Images[0].url
                         : 'https://image.freepik.com/free-vector/delivery-logo-template_15146-141.jpg')
                 }
                 alt="Usuario"

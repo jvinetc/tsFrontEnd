@@ -11,6 +11,9 @@ export interface IDriver {
     status?: string,
     createAt?: Date,
     updateAt?: Date,
+    urlPermisoCirculacion?: string;
+    urlRevicionTecnica?: string;
+    urlLiceciaConducir?: string;
     User?: IUser | null | undefined;
     Comunas?: IComuna[] | null | undefined;
     vencimientoLiceciaConducir?: string;

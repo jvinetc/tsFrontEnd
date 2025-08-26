@@ -100,7 +100,7 @@ const DriversTable = () => {
                                 <ul>
                                     <li >
                                         <a
-                                            href={`${API_URL}/uploads/${d.liceciaConducir}`}
+                                            href={d.urlLiceciaConducir}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="flex items-center gap-2 text-blue-600 hover:text-blue-800"
@@ -112,7 +112,7 @@ const DriversTable = () => {
                                         {/* Vista previa tipo burbuja */}
                                         <div className="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded shadow-lg p-2 z-50 hidden group-hover:block">
                                             <iframe
-                                                src={`${API_URL}/uploads/${d.liceciaConducir}`}
+                                                src={d.urlLiceciaConducir}
                                                 className="w-full h-40"
                                                 title="Vista previa PDF"
                                             />
@@ -120,7 +120,7 @@ const DriversTable = () => {
                                     </li>
                                     <li >
                                         <a
-                                            href={`${API_URL}/uploads/${d.permisoCirculacion}`}
+                                            href={d.urlPermisoCirculacion}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="flex items-center gap-2 text-blue-600 hover:text-blue-800"
@@ -132,7 +132,7 @@ const DriversTable = () => {
                                         {/* Vista previa tipo burbuja */}
                                         <div className="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded shadow-lg p-2 z-50 hidden group-hover:block">
                                             <iframe
-                                                src={`${API_URL}/uploads/${d.permisoCirculacion}`}
+                                                src={d.urlPermisoCirculacion}
                                                 className="w-full h-40"
                                                 title="Vista previa PDF"
                                             />
@@ -140,7 +140,7 @@ const DriversTable = () => {
                                     </li>
                                     <li >
                                         <a
-                                            href={`${API_URL}/uploads/${d.revicionTecnica}`}
+                                            href={d.urlRevicionTecnica}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="flex items-center gap-2 text-blue-600 hover:text-blue-800"
@@ -152,7 +152,7 @@ const DriversTable = () => {
                                         {/* Vista previa tipo burbuja */}
                                         <div className="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded shadow-lg p-2 z-50 hidden group-hover:block">
                                             <iframe
-                                                src={`${API_URL}/uploads/${d.revicionTecnica}`}
+                                                src={d.urlRevicionTecnica}
                                                 className="w-full h-40"
                                                 title="Vista previa PDF"
                                             />
