@@ -38,7 +38,7 @@ export const downloadTemplate = (token: string) => api.get(`/stop/downloadTempla
     }
 });
 
-export const listStops = (token: string) => api.get('/stop', {
+export const listStops = (token: string) => api.get<IStop[]>('/stop', {
     headers: { Authorization: `Bearer ${token}` }
 });
 export const listStopChart = (token: string) => api.get<responseChart[]>('/stop/chart', {
@@ -64,6 +64,10 @@ export const listStopsByAdmin = ({ token, limit, order, page, search }: PropsQue
     })
 }
 
-export const asignDriver = (token: string) => api.post('/stop/asignDriver',{}, {
+export const asignDriver = (token: string) => api.post('/stop/asignDriver', {}, {
     headers: { Authorization: `Bearer ${token}` }
 })
+
+export const getStopById = ({ token, id }: { token: string, id: number }) => api.get<IStop>(`/stop/stop/${id}`, {
+    headers: { Authorization: `Bearer ${token}` }
+});

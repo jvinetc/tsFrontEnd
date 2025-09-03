@@ -1,3 +1,4 @@
+import Notifications from '../components/Notifications';
 import { useUser } from '../context/UserContext';
 
 const Profile = () => {
@@ -27,27 +28,14 @@ const Profile = () => {
 
       {/* Información detallada */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <InfoCard label="Teléfono" value={user?.phone} />
-        <InfoCard label="Rol" value={user?.Role?.name} />
-        <InfoCard label="Estado" value={user?.state} />
+        <div className='grid gap-4'>
+          <InfoCard label="Teléfono" value={user?.phone} />
+          <InfoCard label="Rol" value={user?.Role?.name} />
+          <InfoCard label="Estado" value={user?.state} />
+        </div>
+        <Notifications />
       </div>
 
-      {/* Notificaciones */}
-      {/* <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
-        <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-200 border-b pb-2 mb-4">📬 Mensajes y Notificaciones</h3>
-        {notifications.length > 0 ? (
-          <ul className="space-y-2">
-            {notifications.map((n, i) => (
-              <li key={i} className="border-l-4 border-blue-500 pl-3 text-gray-700 dark:text-gray-300">
-                <p className="font-medium">{n.title}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{n.message}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-gray-500 dark:text-gray-400">No tienes notificaciones pendientes.</p>
-        )}
-      </div> */}
     </div>
   )
 }

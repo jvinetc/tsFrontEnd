@@ -4,12 +4,16 @@ import { FaLinkedin, FaGithub } from 'react-icons/fa6';
 import { Link, useLocation } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 import ImageButton from './ImageButton';
+import NotificationBell from './NotificationBell';
+import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
 
 type SideBarProps = {
     sidebarOpen: boolean;
+    darkMode: boolean;
+    setDarkMode: (value: boolean) => void;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ sidebarOpen }) => {
+const SideBar: React.FC<SideBarProps> = ({ sidebarOpen, darkMode, setDarkMode }) => {
     const { isLoggedIn, user } = useUser();
     const location = useLocation();
     const isActive = (path: string) =>
@@ -41,6 +45,7 @@ const SideBar: React.FC<SideBarProps> = ({ sidebarOpen }) => {
                             <p className="text-sm text-gray-500 dark:text-gray-400">{user?.Role?.name?.toUpperCase()}</p>
                             <Link to="/logout" className="block hover:text-blue-200">Cerrar sesion</Link>
                         </div>
+                        <NotificationBell />
                     </div>
                     <nav className="p-4 space-y-2">
                         <Link to="/" className={`block hover:text-blue-500 ${isActive('/')}`}>Inicio</Link>
@@ -49,7 +54,7 @@ const SideBar: React.FC<SideBarProps> = ({ sidebarOpen }) => {
                         <Link to="/sells" className={`block hover:text-blue-500 ${isActive('/sells')}`}>Tiendas</Link>
                         <Link to="/stops" className={`block hover:text-blue-500 ${isActive('/stops')}`}>Puntos</Link>
                         <Link to="/prices" className={`block hover:text-blue-500 ${isActive('/prices')}`}>Tarifas</Link>
-                        {/* <Link to="/configuration" className={`block hover:text-blue-500 ${isActive('/configuration')}`}>Configuraciones</Link> */}
+                        <Link to="/payments" className={`block hover:text-blue-500 ${isActive('/payments')}`}>Pagos recibidos</Link>
                     </nav>
                 </>}
             {/* Redes sociales y contacto */}
@@ -66,6 +71,9 @@ const SideBar: React.FC<SideBarProps> = ({ sidebarOpen }) => {
                     </Link>
                 </div>
                 <p className="text-xs text-center text-gray-400 dark:text-gray-500">© 2025 AppEnvios</p>
+                <button onClick={() => setDarkMode(!darkMode)} className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700">
+                    {darkMode ? <SunIcon className="h-6 w-6" /> : <MoonIcon className="h-6 w-6" />}
+                </button>
             </div>
         </aside>
     )

@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     const { token} = useUser();
     const tokenSession = sessionStorage.getItem('token');
     if (!token || !tokenSession) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/" replace />;
     }
 
     return children;

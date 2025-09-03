@@ -1,5 +1,6 @@
 import type { IComuna } from "./Comuna";
 import type { IDriver } from "./Driver";
+import type { IPayment } from "./Payment";
 import type { IRate } from "./Rate";
 import type { ISell } from "./Sell";
 
@@ -25,6 +26,7 @@ export interface IStop {
     Rate?: IRate | null | undefined;
     Sell?: ISell | null | undefined;
     Driver?:IDriver | null | undefined;
+    Payment?:IPayment | null | undefined
 }
 
 export interface responseChart{

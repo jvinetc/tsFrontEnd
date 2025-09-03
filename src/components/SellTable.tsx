@@ -37,9 +37,7 @@ const SellTable = () => {
         <div className="p-4 space-y-4">
             <div className="flex justify-between items-center">
                 <h2 className="text-xl font-bold">Listado de tiendas</h2>
-                {/* <button onClick={handleAsign} className="bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-blue-700">
-                    <FaPlus /> Asignar Conductores
-                </button> */}
+                
             </div>
 
             {/* Filtros */}
