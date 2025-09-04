@@ -17,6 +17,8 @@ import Prices from "./Pages/Prices";
 import RateForm from "./components/RateForm";
 import { useUser } from "./context/UserContext";
 import Payments from "./Pages/Payments";
+import StopForm from "./components/StopForm";
+import SellForm from "./components/SellForm";
 
 
 function AppRouter() {
@@ -35,7 +37,11 @@ function AppRouter() {
           <Route path="drivers/create" element={<ProtectedRoute><DriverForm /></ProtectedRoute>} />
           <Route path="drivers/edit/:id" element={<ProtectedRoute><DriverForm /></ProtectedRoute>} />
           <Route path="sells" element={<ProtectedRoute><Sells /></ProtectedRoute>} />
+          <Route path="sells/edit/:id" element={<ProtectedRoute><SellForm /></ProtectedRoute>} />
+          <Route path="sells/create" element={<ProtectedRoute><SellForm /></ProtectedRoute>} />
           <Route path="stops" element={<ProtectedRoute><Stops /></ProtectedRoute>} />
+          <Route path="stops/create/:sellId" element={<ProtectedRoute><StopForm /></ProtectedRoute>} />
+          <Route path="stops/edit/:id" element={<ProtectedRoute><StopForm /></ProtectedRoute>} />
           <Route path="prices" element={<ProtectedRoute><Prices /></ProtectedRoute>} />
           <Route path="payments" element={<ProtectedRoute><Payments /></ProtectedRoute>} />
           <Route path="prices/create" element={<ProtectedRoute><RateForm /></ProtectedRoute>} />

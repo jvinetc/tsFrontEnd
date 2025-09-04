@@ -3,11 +3,11 @@ import type { IStop } from '../interface/Stop';
 
 
 
-const PaymentTable = ({ payment, stops, isActive, setIsActive }: {payment: IPayment, stops:IStop[], isActive: boolean, setIsActive: (value: boolean) => void }) => {
+const PaymentTable = ({ payment, stops, isActive, onSelect }: {payment: IPayment, stops:IStop[], isActive: boolean, onSelect: () => void }) => {
     return (
         <div>
 
-            <div onClick={() => setIsActive(true)} key={payment.id} className={isActive ? "bg-beige dark:bg-beige-800 rounded-lg shadow p-4 border border-gray-200 dark:border-gray-700 grid grid-cols-1 md:grid-cols-2 p-4"
+            <div onClick={onSelect} key={payment.id} className={isActive ? "bg-beige dark:bg-beige-800 rounded-lg shadow p-4 border border-gray-200 dark:border-gray-700 grid grid-cols-1 md:grid-cols-2 p-4"
                 : "bg-white dark:bg-gray-800 rounded-lg shadow p-4 border border-gray-200 dark:border-gray-700 grid grid-cols-1 md:grid-cols-2 p-4"}>
                 <div>
                     <h3 className="font-bold text-lg text-gray-800 dark:text-white">Orden: {payment?.buy_order}</h3>

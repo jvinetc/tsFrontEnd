@@ -15,13 +15,14 @@ type Response = {
 const Payments = () => {
 
   const [response, setResponse] = useState<Response[]>([]);
-  const [isActive, setIsActive] = useState(false);
+  //const [isActive, setIsActive] = useState(false);
   const [search, setSearch] = useState<string>('')
   const [order, setOrder] = useState<string>('')
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
   const [count, setCount] = useState(0);
   const { setLoading } = useLoading();
+  const [activeStopId, setActiveStopId] = useState<number>();
   const { token } = useUser();
 
   useEffect(() => {
@@ -78,7 +79,9 @@ const Payments = () => {
         </select>
       </div>
       {response.map(({ payment, stops }: Response) => (
-        <PaymentTable payment={payment} stops={stops} isActive={isActive} setIsActive={setIsActive} key={payment.id} />
+        <PaymentTable payment={payment} stops={stops} 
+        isActive={activeStopId === Number(payment.id)} 
+        onSelect={() => setActiveStopId(Number(payment.id ?? 0))} key={payment.id} />
       ))
 
       }

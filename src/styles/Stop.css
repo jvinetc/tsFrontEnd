@@ -1,0 +1,16 @@
+.toggle-checkbox {
+  @apply w-12 h-6 rounded-full bg-gray-300 dark:bg-gray-600 relative transition duration-300 cursor-pointer appearance-none;
+}
+
+.toggle-checkbox:checked {
+  @apply bg-blue-600 dark:bg-blue-400;
+}
+
+.toggle-checkbox::before {
+  content: '';
+  @apply absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300;
+}
+
+.toggle-checkbox:checked::before {
+  transform: translateX(24px);
+}

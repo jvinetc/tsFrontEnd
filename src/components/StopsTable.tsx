@@ -18,7 +18,6 @@ const StopsTable = () => {
     /* const [filters, setFilters] = useState<string>(); */
     const { isLoading, setLoading } = useLoading();
     const { token } = useUser();
-    /* const [stops, setStops] = useState<IStop[] | undefined | null>(); */
     const [stopsByMap, setStopsByMap] = useState<IStop[] | undefined | null>();
     const { showMessage } = useMessage();
     const [activeStopId, setActiveStopId] = useState<number | null>(null);
@@ -82,7 +81,7 @@ const StopsTable = () => {
             setLoading(false);
         }
     }
-
+    
     return (
         <div className="p-4 space-y-4">
             <div className="flex justify-between items-center">
@@ -102,7 +101,7 @@ const StopsTable = () => {
                     <div className="overflow-y-auto space-y-4">
                         {stopsByMap.map((s: IStop) => (
                             <StopCard key={s.id} stop={s} isActive={activeStopId === s.id}
-                                onSelect={() => setActiveStopId(s.id ?? 0)} onDelete={handleDelete} />
+                                onSelect={() => setActiveStopId(s.id ?? 0)} onDelete={handleDelete}/>
                         ))}
                     </div>
                     {/* Mapa */}

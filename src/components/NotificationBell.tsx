@@ -16,6 +16,10 @@ const NotificationBell = () => {
 
     useEffect(() => {
         const loadNotifications = async () => {
+            if(visible){
+                setVisible(false);
+                return;
+            }
             setLoading(true);
             try {
                 const { data } = await getNotRead();
@@ -31,12 +35,11 @@ const NotificationBell = () => {
             console.log(data);
             loadNotifications();
         });
-
         return () => {
             socket.off('admin');
         };
         
-    }, []);
+    }, [!notifications]);
 
 
     return (
@@ -44,7 +47,6 @@ const NotificationBell = () => {
             <button
                 onClick={() => setVisible(!visible)}
                 className="relative p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-                onBlur={()=>setVisible(false)}
             >
                 <FiBell className="text-xl text-gray-800 dark:text-white" />
                 {notifications && notifications.length > 0 && (

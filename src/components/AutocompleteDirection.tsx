@@ -55,7 +55,7 @@ const AutocompleteDirection: React.FC<AutoCompleteProps> =
         }, [data?.addres, isEditingAddress])
 
         return (
-            <div className="max-w-md mx-auto">
+            <div >
                 <input
                     type="text"
                     value={data?.addres}
@@ -64,9 +64,8 @@ const AutocompleteDirection: React.FC<AutoCompleteProps> =
                         setData({ ...data, addres: e.target.value })
                         setIsEditingAddress(true);
                     }}
-                placeholder="Buscar dirección..."
-                className={`w-full px-4 py-2 text-sm rounded-lg border ${isEdit ? 'border-gray-300 dark:border-gray-600' : 'border-transparent'
-                    } bg-white dark:bg-gray-800 text-gray-800 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    placeholder="Buscar dirección..."
+                    className='w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500'
                 />
 
                 {suggestions.length > 0 && (

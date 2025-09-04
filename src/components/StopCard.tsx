@@ -1,7 +1,13 @@
+import { Link } from "react-router-dom";
 import type { IStop } from "../interface/Stop";
-import { BiEditAlt, BiTrashAlt, BiCheckCircle } from "react-icons/bi";
-
-const StopCard = ({ stop, isActive, onSelect, onDelete }: { stop: IStop, isActive: boolean, onSelect: () => void, onDelete:(value:IStop)=>void }) => (
+import { BiEditAlt, BiTrashAlt } from "react-icons/bi";
+type CardProps = {
+    stop: IStop;
+    isActive: boolean;
+    onSelect: () => void;
+    onDelete: (value: IStop) => void;
+}
+const StopCard = ({ stop, isActive, onSelect, onDelete }: CardProps) => (
     <div onClick={onSelect} className={isActive ? "bg-beige dark:bg-beige-800 rounded-lg shadow p-4 border border-gray-200 dark:border-gray-700 grid grid-cols-1 md:grid-cols-2 p-4"
         : "bg-white dark:bg-gray-800 rounded-lg shadow p-4 border border-gray-200 dark:border-gray-700 grid grid-cols-1 md:grid-cols-2 p-4"}>
         <div>
@@ -18,9 +24,10 @@ const StopCard = ({ stop, isActive, onSelect, onDelete }: { stop: IStop, isActiv
             </p>
         </div>
         <div className="grid grid-row justify-items-end">
-            {stop.status !== 'delivery' && <><button className="flex text-sm text-gray-600 dark:text-gray-300" onClick={()=>onDelete(stop)}><BiTrashAlt size={24} color="red" />Eliminar</button>
-                <button className="flex text-sm text-gray-600 dark:text-gray-300"><BiEditAlt size={24} color="yellow" />Editar</button>
-                <button className="flex text-sm text-gray-600 dark:text-gray-300"><BiCheckCircle size={24} color="green" />Reasignar</button></>}
+            {stop.status !== 'delivery' && <>
+                <button className="flex text-sm text-gray-600 dark:text-gray-300" onClick={() => onDelete(stop)}><BiTrashAlt />Eliminar</button>
+                <Link to={`/stops/edit/${stop.id}`} className="flex text-sm text-gray-600 dark:text-gray-300"><BiEditAlt/>Editar</Link>
+            </>}
         </div>
     </div>
 );
