@@ -24,3 +24,8 @@ export interface ResponseList {
     drivers: IDriver[] | null | undefined; 
     count: number;
 }
+
+export interface responseChart{
+    label?:string;
+    value?:number;
+}

@@ -55,6 +55,7 @@ const SideBar: React.FC<SideBarProps> = ({ sidebarOpen, darkMode, setDarkMode })
                         <Link to="/stops" className={`block hover:text-blue-500 ${isActive('/stops')}`}>Puntos</Link>
                         <Link to="/prices" className={`block hover:text-blue-500 ${isActive('/prices')}`}>Tarifas</Link>
                         <Link to="/payments" className={`block hover:text-blue-500 ${isActive('/payments')}`}>Pagos recibidos</Link>
+                        <Link to="/pickups" className={`block hover:text-blue-500 ${isActive('/pickups')}`}>Registro de Retiros</Link>
                     </nav>
                 </>}
             {/* Redes sociales y contacto */}

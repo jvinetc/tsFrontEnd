@@ -19,6 +19,7 @@ import { useUser } from "./context/UserContext";
 import Payments from "./Pages/Payments";
 import StopForm from "./components/StopForm";
 import SellForm from "./components/SellForm";
+import PickUp from "./Pages/PickUp";
 
 
 function AppRouter() {
@@ -43,6 +44,7 @@ function AppRouter() {
           <Route path="stops/create/:sellId" element={<ProtectedRoute><StopForm /></ProtectedRoute>} />
           <Route path="stops/edit/:id" element={<ProtectedRoute><StopForm /></ProtectedRoute>} />
           <Route path="prices" element={<ProtectedRoute><Prices /></ProtectedRoute>} />
+          <Route path="pickups" element={<ProtectedRoute><PickUp /></ProtectedRoute>} />
           <Route path="payments" element={<ProtectedRoute><Payments /></ProtectedRoute>} />
           <Route path="prices/create" element={<ProtectedRoute><RateForm /></ProtectedRoute>} />
           <Route path="prices/edit/:id" element={<ProtectedRoute><RateForm /></ProtectedRoute>} />

@@ -1,4 +1,4 @@
-import type { IDriver, ResponseList } from "../interface/Driver";
+import type { IDriver, responseChart, ResponseList } from "../interface/Driver";
 import api from "./axios";
 type PropsQuery = {
     token: string, limit?: number, order?: string | '', page?: number, search?: string | ''
@@ -27,13 +27,17 @@ export const createDriver = (token: string, driver: FormData) => api.post<IDrive
     }
 });
 
-export const updateDriver = (token: string, driver: FormData, id:number) => api.put(`/driver/${id}`, driver, {
+export const updateDriver = (token: string, driver: FormData, id: number) => api.put(`/driver/${id}`, driver, {
     headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data'
     }
 });
 
-export const disableDriver = (token: string, id: number) => api.put('/driver/disable', {id}, {
+export const disableDriver = (token: string, id: number) => api.put('/driver/disable', { id }, {
     headers: { Authorization: `Bearer ${token}` }
 });
+
+export const getDeliveredChart = (token: string) => api.get<responseChart[]>('/driver/getDeliveredChart', {
+    headers: { Authorization: `Bearer ${token}` }
+})

@@ -15,6 +15,7 @@ import { useConfirmDialog } from '../hooks/useConfirmDialog';
 import * as xlsx from 'xlsx';
 import { saveAs } from 'file-saver';
 import Paginator from './Paginator';
+import { createPickUp } from '../api/PickUp';
 
 const StopsTable = () => {
 
@@ -110,8 +111,10 @@ const StopsTable = () => {
         setLoading(true);
         try {
             stop.status = status;
-            if (status === 'delivery')
+            if (status === 'delivery') {
+                await createPickUp({ token, data: { sellId: stop.sellId, stopId: stop.id, driverId: stop.driverId ?? 0 } });
                 stop.driverId = null;
+            }
             await updateStop(stop, token);
             setStopsByMap(null);
             showMessage({ text: `El estado cambio a ${status} correctamente`, type: 'success' })

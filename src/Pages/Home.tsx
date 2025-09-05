@@ -4,6 +4,9 @@ import { listStopChart, listStopsComunas } from '../api/Stops';
 import type { responseChart } from '../interface/Stop';
 import { useUser } from '../context/UserContext';
 import { payChart, paySellChart } from '../api/Payment';
+import { getDeliveredChart } from '../api/Driver';
+import { chartPickUps } from '../api/PickUp';
+import { useNavigate } from 'react-router-dom';
 
 
 const Home = () => {
@@ -11,7 +14,10 @@ const Home = () => {
   const [chart2, setChart2] = useState<responseChart[] | undefined>(undefined);
   const [chart3, setChart3] = useState<responseChart[] | undefined>(undefined);
   const [chart4, setChart4] = useState<responseChart[] | undefined>(undefined);
+  const [chart5, setChart5] = useState<responseChart[] | undefined>(undefined);
+  const [chart6, setChart6] = useState<responseChart[] | undefined>(undefined);
   const { token } = useUser();
+  const navigate = useNavigate();
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -33,6 +39,16 @@ const Home = () => {
         const { data: sellsPay, status: statu } = await paySellChart();
         if (statu === 200 && sellsPay) {
           setChart4(sellsPay);
+        }
+
+        const { data: drivDeliv, status: st} = await getDeliveredChart(token);
+        if (st === 200 && drivDeliv) {
+          setChart5(drivDeliv);
+        }
+
+        const { data: pick, status: s} = await chartPickUps(token);
+        if (s === 200 && pick) {
+          setChart6(pick);
         }
       } catch (error) {
         console.log(error);
@@ -58,6 +74,10 @@ const Home = () => {
         <ChartCard title="Registros por comuna" data={chart1} />
         <ChartCard title="Registros de pagos por fecha" data={chart3} />
         <ChartCard title="Registros pagos por tienda" data={chart4} />
+        <ChartCard title="Registros entregados por conductor" data={chart5} />
+        <ChartCard title="Registros retirados por conductor" data={chart6} >
+          <button onClick={()=>navigate('/pickups')}>Ver Detalles...</button>
+        </ChartCard>
       </section>
     </div>
   )
