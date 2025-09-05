@@ -12,7 +12,7 @@ export interface IStop {
     notes?: string;
     buyOrder?: string;
     sellId?: number;
-    driverId?: number;
+    driverId?: number | null;
     comunaId?: number;
     rateId?: number;
     status?: string;

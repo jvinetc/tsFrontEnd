@@ -8,6 +8,7 @@ import { useLoading } from '../context/LoadingContext';
 import { FaFilePdf, FaPlus, FaTrash } from 'react-icons/fa6';
 import { FaEdit } from 'react-icons/fa';
 import Paginator from './Paginator';
+import { useConfirmDialog } from '../hooks/useConfirmDialog';
 
 const DriversTable = () => {
     const [drivers, setDrivers] = useState<IDriver[] | null>(null);
@@ -18,6 +19,7 @@ const DriversTable = () => {
     const [filters, setFilters] = useState('');
     const [page, setPage] = useState<number>(1);
     const [limit] = useState<number>(5);
+    const { confirm, ConfirmDialog } = useConfirmDialog();
     useEffect(() => {
         const loadData = async () => {
             try {
@@ -41,6 +43,11 @@ const DriversTable = () => {
     }, [page, filters]);
 
     const onDelete = async (id: number) => {
+        const accepted = await confirm('¿Estás seguro de que deseas eliminar este conductor?');
+        if (!accepted) {
+            showMessage({ text: 'Operacion cancelada', type: 'info' })
+            return;
+        }
         setLoading(true);
         try {
             await disableDriver(token, id)
@@ -162,7 +169,7 @@ const DriversTable = () => {
                             </td>
                             <td className="p-2">
                                 <ul>
-                                    <li>{d.vencimientoLiceciaConducir &&new Date(d.vencimientoLiceciaConducir).toLocaleDateString('Es-es').split('T')[0]}</li>
+                                    <li>{d.vencimientoLiceciaConducir && new Date(d.vencimientoLiceciaConducir).toLocaleDateString('Es-es').split('T')[0]}</li>
                                     <li>{d.vencimientoPermisoCirculacion && new Date(d.vencimientoPermisoCirculacion).toLocaleDateString('Es-es').split('T')[0]}</li>
                                     <li>{d.vencimientoRevicionTecnica && new Date(d.vencimientoRevicionTecnica).toLocaleDateString('Es-es').split('T')[0]}</li>
                                 </ul>
@@ -181,6 +188,7 @@ const DriversTable = () => {
                 onPageChange={(newPage) => setPage(newPage)}
                 count={countDrivers}
             />
+            <ConfirmDialog />
         </div>
     )
 }

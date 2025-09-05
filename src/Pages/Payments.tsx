@@ -67,7 +67,7 @@ const Payments = () => {
           <option value="amount_DESC">Total Descendente</option>
         </select>
         <select
-          value={order}
+          value={limit}
           onChange={(e) => setLimit(Number(e.target.value))}
           className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >

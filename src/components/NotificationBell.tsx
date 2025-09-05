@@ -16,7 +16,7 @@ const NotificationBell = () => {
 
     useEffect(() => {
         const loadNotifications = async () => {
-            if(visible){
+            if (visible) {
                 setVisible(false);
                 return;
             }
@@ -38,7 +38,7 @@ const NotificationBell = () => {
         return () => {
             socket.off('admin');
         };
-        
+
     }, [!notifications]);
 
 

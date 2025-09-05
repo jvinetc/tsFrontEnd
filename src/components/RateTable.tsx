@@ -77,6 +77,7 @@ const RateTable = () => {
                         <th className="p-2">Nombre del servicio</th>
                         <th className="p-2">Precio</th>
                         <th className="p-2">Estado</th>
+                        <th className="p-2">Accion</th>
                     </tr>
                 </thead>
                 <tbody>

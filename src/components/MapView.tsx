@@ -17,7 +17,7 @@ const MapView = ({ stops, activeStopId, setActiveStopId }: { stops: IStop[], act
         }
     }, [activeStopId]);
 
-   
+
 
     return (
         <LoadScript googleMapsApiKey={mapKey}>
@@ -26,27 +26,36 @@ const MapView = ({ stops, activeStopId, setActiveStopId }: { stops: IStop[], act
                     mapRef.current = map;
                     setMapsApi(window.google.maps);
                 }}>
-                {stops.map((s: IStop) => {
+                {mapsApi && stops.map((s: IStop) => {
                     const initial = s.Driver?.User?.firstName?.charAt(0).toUpperCase() || '';
-                    return mapsApi&&(                        
-                            <Marker key={s.id ?? 0} position={{ lat: s.lat ?? 0, lng: s.lng ?? 0 }}
-                                label={initial ? { text: initial, color: 'white', fontSize: '14px' } : undefined}
-                                icon={{
-                                    url: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
-                                    scaledSize: new mapsApi.Size(
-                                        activeStopId === s.id ? 50 : 30,
-                                        activeStopId === s.id ? 50 : 30
-                                    ),
-                                }}
-                                onClick={() => {
-                                    setActiveStopId(s.id ?? 0);
-                                    setStop(s);
-                                }} />                        
+                    const initStatus = s.status?.charAt(0).toUpperCase() || '';
+                    return (
+                        <Marker key={s.id ?? 0}
+                            position={{
+                                lat: s.Sell && s.status === 'pickUp' ? Number(s.Sell.lat) : s.lat ?? 0,
+                                lng: s.Sell && s.status === 'pickUp' ? Number(s.Sell.lng) : s.lng ?? 0
+                            }}
+
+                            label={initial ? { text: `${initial}-${initStatus} `, color: 'black', fontSize: '14px' } : initStatus}
+                            icon={{
+                                url: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                                scaledSize: new mapsApi.Size(
+                                    activeStopId === s.id ? 55 : 35,
+                                    activeStopId === s.id ? 55 : 35
+                                ),
+                            }}
+                            onClick={() => {
+                                setActiveStopId(s.id ?? 0);
+                                setStop(s);
+                            }} />
                     )
                 })}
-               {stop && (
+                {stop && (
                     <InfoWindow
-                        position={{ lat: stop.lat ?? 0, lng: stop.lng ?? 0 }}
+                        position={{
+                                lat: stop.Sell && stop.status === 'pickUp' ? Number(stop.Sell.lat) : stop.lat ?? 0,
+                                lng: stop.Sell && stop.status === 'pickUp' ? Number(stop.Sell.lng) : stop.lng ?? 0
+                            }}
                         onCloseClick={() => {
                             setActiveStopId(null)
                             setStop(null);
@@ -55,6 +64,7 @@ const MapView = ({ stops, activeStopId, setActiveStopId }: { stops: IStop[], act
                         <div>
                             <strong>{stop.addresName}</strong><br />
                             {stop.addres}, {stop.Comuna?.name}<br />
+                            {stop.status === 'pickUp' && `Retiro: ${stop.Sell?.addres}, ${stop.Sell?.Comuna?.name} < br />`}
                             Conductor: {stop.Driver?.User?.firstName} {stop.Driver?.User?.lastName}
                         </div>
                     </InfoWindow>
