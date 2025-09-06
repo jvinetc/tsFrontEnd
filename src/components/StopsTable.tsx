@@ -110,6 +110,10 @@ const StopsTable = () => {
     const changeStatus = async ({ stop, status }: { stop: IStop, status: string }) => {
         setLoading(true);
         try {
+            if (stop.driverId === null) {
+                showMessage({ text: `No puede cambiar de estado si no asigno un conductor`, type: 'info' });
+                return;
+            }
             stop.status = status;
             if (status === 'delivery') {
                 await createPickUp({ token, data: { sellId: stop.sellId, stopId: stop.id, driverId: stop.driverId ?? 0 } });
