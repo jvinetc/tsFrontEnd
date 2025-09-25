@@ -20,6 +20,7 @@ import Payments from "./Pages/Payments";
 import StopForm from "./components/StopForm";
 import SellForm from "./components/SellForm";
 import PickUp from "./Pages/PickUp";
+import { routes as circuitRoute } from '@jvinetc/front-api-circuit';
 
 
 function AppRouter() {
@@ -50,6 +51,9 @@ function AppRouter() {
           <Route path="prices/edit/:id" element={<ProtectedRoute><RateForm /></ProtectedRoute>} />
           <Route path="valida_pago" element={<PaymentValidate />} />
           <Route path="*" element={<NotFound />} />
+          {circuitRoute.map(({ path, element }) => (
+            <Route key={path} path={path} element={<ProtectedRoute>{element}</ProtectedRoute>} />
+          ))}
         </Route>
       </Routes>
     </BrowserRouter>
