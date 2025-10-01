@@ -30,7 +30,7 @@ const DriversTable = () => {
                     showMessage({ text: 'Error al cargar los datos, intente mas tarde', type: 'info' });
                     return;
                 }
-                setCountDrivers(data.drivers.length);
+                setCountDrivers(data.count);
                 setDrivers(data.drivers);
             } catch (error) {
                 console.log(error);

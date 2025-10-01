@@ -25,16 +25,27 @@ export interface IStop {
     Comuna?: IComuna;
     Rate?: IRate | null | undefined;
     Sell?: ISell | null | undefined;
-    Driver?:IDriver | null | undefined;
-    Payment?:IPayment | null | undefined
+    Driver?: IDriver | null | undefined;
+    Payment?: IPayment | null | undefined
 }
 
-export interface responseChart{
-    label?:string;
-    value?:number;
+export interface responseChart {
+    label?: string;
+    value?: number;
 }
 
-export interface ResponseList{
-    count:number;
+export interface ResponseList {
+    count: number;
     stops: IStop[] | undefined | null;
+}
+
+export interface IPickupMap {
+    sellId?: number;
+    stops?: IStop[];
+    lat?: number;
+    lng?: number;
+    address?: string;
+    comuna?: string;
+    name?: string;
+    packageCount?:number;
 }

@@ -16,8 +16,7 @@ const MapView = ({ stops, activeStopId, setActiveStopId }: { stops: IStop[], act
             mapRef.current.setZoom(15);
         }
     }, [activeStopId]);
-
-
+   
 
     return (
         <LoadScript googleMapsApiKey={mapKey}>
@@ -30,22 +29,22 @@ const MapView = ({ stops, activeStopId, setActiveStopId }: { stops: IStop[], act
                     const initial = s.Driver?.User?.firstName?.charAt(0).toUpperCase() || '';
                     const initStatus = s.status?.charAt(0).toUpperCase() || '';
                     return (
-                        <Marker key={s.id ?? 0}
+                        <Marker key={s.Sell && s.status === 'pickUp' ? s.sellId : s.id}
                             position={{
                                 lat: s.Sell && s.status === 'pickUp' ? Number(s.Sell.lat) : s.lat ?? 0,
                                 lng: s.Sell && s.status === 'pickUp' ? Number(s.Sell.lng) : s.lng ?? 0
                             }}
 
-                            label={initial ? { text: `${initial}-${initStatus} `, color: 'black', fontSize: '14px' } : initStatus}
+                            label={initial ? { text: `${initial}-${initStatus}`, color: 'black', fontSize: '14px' } : initStatus}
                             icon={{
                                 url: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
                                 scaledSize: new mapsApi.Size(
-                                    activeStopId === s.id ? 55 : 35,
-                                    activeStopId === s.id ? 55 : 35
+                                    activeStopId === s.Sell && s.status === 'pickUp' ? s.sellId ? 65 : 55 : s.id ? 65 : 55,
+                                    activeStopId === s.Sell && s.status === 'pickUp' ? s.sellId ? 65 : 55 : s.id ? 65 : 55
                                 ),
                             }}
                             onClick={() => {
-                                setActiveStopId(s.id ?? 0);
+                                setActiveStopId(s.Sell && s.status === 'pickUp' ? Number(s.sellId) : Number(s.id));
                                 setStop(s);
                             }} />
                     )
@@ -53,9 +52,9 @@ const MapView = ({ stops, activeStopId, setActiveStopId }: { stops: IStop[], act
                 {stop && (
                     <InfoWindow
                         position={{
-                                lat: stop.Sell && stop.status === 'pickUp' ? Number(stop.Sell.lat) : stop.lat ?? 0,
-                                lng: stop.Sell && stop.status === 'pickUp' ? Number(stop.Sell.lng) : stop.lng ?? 0
-                            }}
+                            lat: stop.Sell && stop.status === 'pickUp' ? Number(stop.Sell.lat) : stop.lat ?? 0,
+                            lng: stop.Sell && stop.status === 'pickUp' ? Number(stop.Sell.lng) : stop.lng ?? 0
+                        }}
                         onCloseClick={() => {
                             setActiveStopId(null)
                             setStop(null);

@@ -6,7 +6,7 @@ import {
     updateStop
 } from '../api/Stops';
 import { useUser } from '../context/UserContext';
-import type { IStop } from '../interface/Stop';
+import type { IPickupMap, IStop } from '../interface/Stop';
 import { FaFileExcel, FaPlus } from 'react-icons/fa6';
 import { useMessage } from '../context/MessageContext ';
 import StopCard from './StopCard';
@@ -46,8 +46,45 @@ const StopsTable = () => {
                         break;
                     case 'pickUp':
                         response = await listStops(token);
-                        if (response && response.data)
-                            setStopsByMap(response.data);
+                        if (response.data) {
+                            const stops: IStop[] = response.data;
+                            const pickUps = stops.filter(stop => stop.status === 'pickUp');
+                            const deliveries = stops.filter(stop => stop.status === 'delivery');
+
+                            // Agrupar pickUps por tienda (sellId)
+                            const groupedPickUps = Object.values(
+                                pickUps.reduce((acc, stop) => {
+                                    const key: number = Number(stop.sellId);
+                                    if (!acc[key]) {
+                                        acc[key] = {
+                                            sellId: key,
+                                            lat: stop.Sell?.lat,
+                                            lng: stop.Sell?.lng,
+                                            address: stop.Sell?.addresPickup,
+                                            comuna: stop.Sell?.Comuna?.name,
+                                            name: stop.Sell?.name
+                                        };
+                                    }
+                                    acc[key].packageCount = pickUps.length;
+                                    return acc;
+                                }, {} as Record<number, IPickupMap>)
+                            );
+                            console.log('groupedPickUps:', groupedPickUps);
+
+                            // Entregas individuales con dirección del stop
+                            const mappedDeliveries = deliveries.map(stop => ({
+                                stopId: stop.id,
+                                lat: stop.lat,
+                                lng: stop.lng,
+                                address: stop.addres,
+                                comuna: stop.Comuna?.name,
+                                driver: stop.Driver?.patente,
+                                fragile: stop.fragile,
+                            }));
+
+                            console.log('mappedDeliveries:', mappedDeliveries)
+                            setStopsByMap(stops);
+                        }
                         break;
                     case 'delivered':
                         if (search && search.length < 3) return;
@@ -132,7 +169,7 @@ const StopsTable = () => {
 
     const generateExcel = () => {
         const headers = ['DIRECCION', 'COMUNA', 'DPTO / TORRE / REFERENCIAS', 'CLIENTE(nombre)', 'TELEFONO',
-            'CORREO', 'NOMBRE DE TIENDA'];
+            'CORREO', 'NOMBRE DE TIENDA','CONDUCTOR'];
         const data = stopsByMap ? stopsByMap.map((stop: IStop) => {
             return [
                 stop.addres,
@@ -141,7 +178,8 @@ const StopsTable = () => {
                 stop.addresName,
                 stop.phone,
                 stop.Sell?.email,
-                stop.Sell?.name
+                stop.Sell?.name,
+                stop.Driver?.User?.email
             ];
         }) : [];
         // Crea hoja con headers y una fila vacía

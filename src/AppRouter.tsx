@@ -20,7 +20,9 @@ import Payments from "./Pages/Payments";
 import StopForm from "./components/StopForm";
 import SellForm from "./components/SellForm";
 import PickUp from "./Pages/PickUp";
-
+import HomeCircuit from "./apiCircuit/pages/HomeCircuit";
+import Plans from "./apiCircuit/pages/Plans";
+import StopsCircuit from "./apiCircuit/pages/StopsCircuit";
 
 function AppRouter() {
   const { token } = useUser();
@@ -47,6 +49,9 @@ function AppRouter() {
           <Route path="pickups" element={<ProtectedRoute><PickUp /></ProtectedRoute>} />
           <Route path="payments" element={<ProtectedRoute><Payments /></ProtectedRoute>} />
           <Route path="prices/create" element={<ProtectedRoute><RateForm /></ProtectedRoute>} />
+          <Route path="circuit/home" element={<ProtectedRoute><HomeCircuit /></ProtectedRoute>} />
+          <Route path="circuit/plans" element={<ProtectedRoute><Plans /></ProtectedRoute>} />
+          <Route path="circuit/stops" element={<ProtectedRoute><StopsCircuit /></ProtectedRoute>} />
           <Route path="prices/edit/:id" element={<ProtectedRoute><RateForm /></ProtectedRoute>} />
           <Route path="valida_pago" element={<PaymentValidate />} />
           <Route path="*" element={<NotFound />} />
