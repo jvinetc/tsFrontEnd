@@ -27,3 +27,17 @@ export interface ILoginResponse{
     user: IUser;
     token:string
 }
+
+export interface ICreateAdmin {
+    email: string;
+    pass: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    age: number;
+    username: string;
+    birthDate: string;
+    sellName: string;
+    addres: string;
+    comunaId: string;
+}

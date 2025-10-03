@@ -1,4 +1,4 @@
-import { IDepot } from "./Depot";
+import type { IDepot } from "./Depot";
 
 export interface IDriver{
     id?: number;

@@ -4,32 +4,17 @@ import { useLoading } from '../context/LoadingContext';
 import { FiBell } from 'react-icons/fi';
 import { getNotRead } from '../api/Notification';
 import { useNavigate } from 'react-router-dom';
-import { io } from 'socket.io-client';
+import { useSocket } from '../context/SocketContext';
 
 const NotificationBell = () => {
     const [visible, setVisible] = useState(false);
     const [notifications, setNotifications] = useState<INotification[] | null | undefined>();
     const { setLoading } = useLoading()
     const navigate = useNavigate();
-    const API_URL = import.meta.env.VITE_SERVER;
-    const socket = io(API_URL);
+    const socket = useSocket();
 
     useEffect(() => {
-        const loadNotifications = async () => {
-            if (visible) {
-                setVisible(false);
-                return;
-            }
-            setLoading(true);
-            try {
-                const { data } = await getNotRead();
-                setNotifications(data);
-            } catch (error) {
-                console.log(error);
-            } finally {
-                setLoading(false);
-            }
-        }
+        if (!socket) return;
         loadNotifications();
         socket.on('admin', (data) => {
             console.log(data);
@@ -40,6 +25,22 @@ const NotificationBell = () => {
         };
 
     }, [!notifications]);
+
+    const loadNotifications = async () => {
+        if (visible) {
+            setVisible(false);
+            return;
+        }
+        setLoading(true);
+        try {
+            const { data } = await getNotRead();
+            setNotifications(data);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    }
 
 
     return (
@@ -64,10 +65,10 @@ const NotificationBell = () => {
                     <ul className="max-h-64 overflow-y-auto">
                         {notifications && notifications.length > 0 ? (
                             notifications.map((n, i) => (
-                                <li key={i} onClick={() => {
-                                    navigate('/profile');
-                                    setVisible(false);
+                                <li key={i} onClick={() => {                                    
                                     setNotifications(null);
+                                    setVisible(false);
+                                    navigate('/profile');
                                 }} className="px-3 py-2 border-b border-gray-100 dark:border-gray-700">
                                     <p className="text-sm text-gray-800 dark:text-gray-100">{n.title}</p>
                                     <p className="text-xs text-gray-500 dark:text-gray-400">{n.message}</p>

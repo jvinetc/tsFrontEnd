@@ -29,7 +29,7 @@ const StopCard = ({ stop, isActive, onSelect, onDelete, changeStatus }: CardProp
             <p className="text-sm text-gray-600 dark:text-gray-300">🛒 {stop.Sell?.name}</p>
             <p className="text-sm text-gray-600 dark:text-gray-300">Estado: {stop.status}</p>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-                Fragil: {stop.fragile ? 'Sí' : 'No'} | Devolución: {stop.devolution ? 'Sí' : 'No'}
+                Fragil: {stop.fragile ? 'Sí' : 'No'} | Devolución: {stop.devolution ? 'Sí' : 'No'} | Cambio: {stop.exchange? 'Sí' : 'No'}
             </p>
             <p className="text-sm text-gray-600 dark:text-gray-300">
                 Conductor:{' '}

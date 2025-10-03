@@ -32,6 +32,8 @@ const Profile = () => {
           <InfoCard label="Teléfono" value={user?.phone} />
           <InfoCard label="Rol" value={user?.Role?.name} />
           <InfoCard label="Estado" value={user?.state} />
+          <InfoCard label="Direccion" value={user?.Sells !== undefined && user?.Sells?.length > 0 ? user?.Sells[0].addresPickup : ''} />
+          <InfoCard label="Tienda" value={user?.Sells !== undefined && user?.Sells?.length > 0 ? user?.Sells[0].name : ''} />
         </div>
         <Notifications />
       </div>

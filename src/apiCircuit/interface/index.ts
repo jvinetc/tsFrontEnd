@@ -1,9 +1,9 @@
-import { IDepot } from "./Depot";
-import { IPlan } from "./Plan";
-import { IAddressStop } from "./AddressStop";
-import { IDriver } from "./DriverApi";
-import { IStopApi } from "./StopApi";
-import { IDeliveryInfo } from "./DeliveryInfo";
-import { IEvent } from "./Event";
+import type { IDepot } from "./Depot";
+import type { IPlan } from "./Plan";
+import type { IAddressStop } from "./AddressStop";
+import type { IDriver } from "./DriverApi";
+import type { IStopApi } from "./StopApi";
+import type { IDeliveryInfo } from "./DeliveryInfo";
+import type { IEvent } from "./Event";
 
-export { IDepot, IPlan, IDriver, IAddressStop, IStopApi, IDeliveryInfo, IEvent }
+export type { IDepot, IPlan, IDriver, IAddressStop, IStopApi, IDeliveryInfo, IEvent }

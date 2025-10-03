@@ -18,6 +18,7 @@ export interface IStop {
     status?: string;
     fragile?: boolean;
     devolution?: boolean;
+    exchange?:boolean;
     lat?: number;
     lng?: number;
     createAt?: Date;

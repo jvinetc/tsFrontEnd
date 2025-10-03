@@ -23,14 +23,17 @@ import PickUp from "./Pages/PickUp";
 import HomeCircuit from "./apiCircuit/pages/HomeCircuit";
 import Plans from "./apiCircuit/pages/Plans";
 import StopsCircuit from "./apiCircuit/pages/StopsCircuit";
+import SetupAdmin from "./Pages/SetupAdmin";
 
 function AppRouter() {
   const { token } = useUser();
+  const setupCompleted = localStorage.getItem('setupCompleted') === 'true';
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={!token ? <Login /> : <Home />} />
+          <Route index element={!setupCompleted? 
+            <SetupAdmin onComplete={() => window.location.reload()} />:!token ? <Login /> : <Home />} />
           <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />

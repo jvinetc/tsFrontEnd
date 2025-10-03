@@ -90,7 +90,7 @@ const StopForm = () => {
     const handleSelect = async (placeId: string) => {
         try {
             const { data } = await detailAddres(placeId, token);
-            const { data: comunas } = await listComunas(token);
+            const { data: comunas } = await listComunas();
             const { addres, streetName, streetNumber, comuna, lat, lng } = data.data;
             if (!addres || !streetName || !streetNumber || !comuna || !lat || !lng) {
                 setSuggestions([]);

@@ -1,4 +1,4 @@
-import type { ILoginResponse, IUser } from '../interface/User';
+import type { ICreateAdmin, ILoginResponse, IUser } from '../interface/User';
 import api from './axios';
 
 export const login = (data: IUser) =>
@@ -15,6 +15,4 @@ export const update = (data: IUser, token: string) =>
     api.put('/', data, {
         headers: { Authorization: `Bearer ${token}` }
     })
-    export const createUser = (data:IUser, token:string )=> api.post<IUser>('/user', data, {
-        headers: { Authorization: `Bearer ${token}` }
-    })
+    export const createUser = (data:ICreateAdmin)=> api.post<IUser>('/user', data)

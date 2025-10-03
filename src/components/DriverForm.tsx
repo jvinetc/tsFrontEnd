@@ -33,7 +33,7 @@ const DriverForm = () => {
     const loadData = async () => {
       try {
         setLoading(true);
-        const { data, status } = await listComunas(token);
+        const { data, status } = await listComunas();
         if (status !== 200 || !data) {
           showMessage({ text: 'No pudieron ser cargados los datos, intente mas tarde', type: 'error' });
           return;
