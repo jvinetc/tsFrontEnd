@@ -5,7 +5,8 @@ import { listComunas } from '../api/Comunas';
 import { useMessage } from '../context/MessageContext ';
 import type { ICreateAdmin } from '../interface/User';
 import { createUser } from '../api/User';
-import {saveAdminLocally} from '../../main'
+/* import path from 'path';
+import * as fs from 'fs'; */
 
 const SetupAdmin = ({ onComplete }: { onComplete: () => void }) => {
     const [form, setForm] = useState<ICreateAdmin>({
@@ -37,7 +38,10 @@ const SetupAdmin = ({ onComplete }: { onComplete: () => void }) => {
         }
         loadComunas();
     }, []);
-
+   /*  const configPath = path.join(app.getPath('userData'), 'admin.json');
+    const saveAdminLocally = (adminData: ICreateAdmin) => {
+        fs.writeFileSync(configPath, JSON.stringify(adminData, null, 2));
+    } */
     const handleSubmit = async () => {
         setLoading(true);
         setError('');
@@ -51,7 +55,7 @@ const SetupAdmin = ({ onComplete }: { onComplete: () => void }) => {
         try {
             const { data, status } = await createUser(form);
             if (status !== 201) {
-                saveAdminLocally(form);
+                /* saveAdminLocally(form); */
                 showMessage({ text: 'No pudo realizarse el registro, intente mas tarde.', type: 'error' });
                 return;
             }

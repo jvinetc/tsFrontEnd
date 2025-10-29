@@ -71,11 +71,8 @@ const DriversTable = () => {
             </div>
 
             {/* Filtros */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input type="text" placeholder="Busque por patente, nombre o apellido del conductor" value={filters} className="input" onChange={(e) => setFilters(e.target.value)} />
-                {/* <input type="date" placeholder="Vencimiento" className="input" onChange={(e) => setFilters(f => ({ ...f, vencimiento: e.target.value }))} />
-                <input type="text" placeholder="Comuna" className="input" onChange={(e) => setFilters(f => ({ ...f, comuna: e.target.value }))} />
-                <input type="text" placeholder="Tipo vehículo" className="input" onChange={(e) => setFilters(f => ({ ...f, tipoVehiculo: e.target.value }))} /> */}
             </div>
 
             {/* Tabla */}

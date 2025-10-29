@@ -19,7 +19,7 @@ const RateForm = () => {
     useEffect(() => {
         const loadData = async () => {
             try {
-                setLoading(true);                
+                setLoading(true);
                 if (id) {
                     setIsEdit(true);
                     await loadRate(Number(id));
@@ -38,8 +38,8 @@ const RateForm = () => {
         setLoading(true);
         try {
             const { data: d, status } = await getRateById(token, Number(id))
-            if (!d || status !== 200 ) return;
-            setRate(d);            
+            if (!d || status !== 200) return;
+            setRate(d);
         } catch (error) {
             console.log(error);
         } finally {
@@ -47,7 +47,7 @@ const RateForm = () => {
         }
 
     }
-    
+
 
     const handleSubmit = async () => {
 
@@ -79,7 +79,7 @@ const RateForm = () => {
             if (!rate || !rate.nameService || !rate.price) {
                 showMessage({ text: 'Todos los campos son requeridos.', type: 'error' });
                 return;
-            }            
+            }
             const { data, status } = await updateRate(token, rate);
             if (status !== 200 || !data) {
                 showMessage({ text: 'Nada se Actualizo', type: 'info' });
@@ -121,7 +121,7 @@ const RateForm = () => {
                     />
                 </div>}
             </div>
-            
+
             {/* ✅ Botón de guardar */}
             {!isEdit ? <button
                 onClick={handleSubmit}
@@ -129,12 +129,20 @@ const RateForm = () => {
             >
                 Guardar
             </button> :
-                <button
-                    onClick={handleUpdate}
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded transition"
-                >
-                    Actualizar
-                </button>}
+                <div className="flex gap-4">
+                    <button
+                        onClick={handleUpdate}
+                        className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded transition"
+                    >
+                        Actualizar
+                    </button>
+                    <button
+                        onClick={()=>navigate('/prices')}
+                        className="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded transition"
+                    >
+                        Cancelar
+                    </button>
+                </div>}
         </div>
     )
 }

@@ -37,21 +37,29 @@ const PickUp = () => {
     }, [page, search, order, limit]);
 
     return (
-        <div>
-            <h1 className="text-2xl font-bold mb-4">Retiros</h1>
-            {!isLoading && pickUps.length > 0 ? <>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    {/* Input de búsqueda */}
+        <div className="space-y-6">
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Retiros</h1>
+
+            {/* 🔍 Filtros */}
+            <section className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {/* Input de búsqueda */}
+                <div className="md:col-span-2">
+                    <label htmlFor="search" className="sr-only">Buscar</label>
                     <input
+                        id="search"
                         type="text"
                         placeholder="Buscar por conductor o tienda"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
+                </div>
 
-                    {/* Dropdown de ordenamiento */}
+                {/* Ordenamiento */}
+                <div>
+                    <label htmlFor="order" className="sr-only">Ordenar</label>
                     <select
+                        id="order"
                         value={order}
                         onChange={(e) => setOrder(e.target.value)}
                         className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -60,34 +68,47 @@ const PickUp = () => {
                         <option value="createAt_ASC">Fecha Ascendente</option>
                         <option value="createAt_DESC">Fecha Descendente</option>
                     </select>
+                </div>
+
+                {/* Cantidad por página */}
+                <div>
+                    <label htmlFor="limit" className="sr-only">Cantidad por página</label>
                     <select
+                        id="limit"
                         value={limit}
                         onChange={(e) => setLimit(Number(e.target.value))}
                         className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                        <option value="">Cantida por pagina...</option>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20C">20</option>
+                        <option value="">Cantidad por página...</option>
+                        {[5, 10, 15, 20].map((n) => (
+                            <option key={n} value={n}>{n}</option>
+                        ))}
                     </select>
                 </div>
-                {pickUps.map((p: IPickUp) => (
-                    <PickupCard pickUp={p}
-                        isActive={activeStopId === Number(p.id)}
-                        onSelect={() => setActiveStopId(Number(p.id ?? 0))} key={p.id} />
-                ))
+            </section>
 
-                }
+            {/* 📦 Resultados */}
+            {!isLoading && pickUps.length > 0 ? (
+                <section className="space-y-4">
+                    {pickUps.map((p: IPickUp) => (
+                        <PickupCard
+                            key={p.id}
+                            pickUp={p}
+                            isActive={activeStopId === Number(p.id)}
+                            onSelect={() => setActiveStopId(Number(p.id ?? 0))}
+                        />
+                    ))}
 
-                <Paginator
-                    currentPage={page}
-                    totalPages={limit}
-                    onPageChange={(newPage) => setPage(newPage)}
-                    count={count}
-                />
-            </> :
-                <h1>Aun No hay contenido para mostrar</h1>}
+                    <Paginator
+                        currentPage={page}
+                        totalPages={limit}
+                        onPageChange={(newPage) => setPage(newPage)}
+                        count={count}
+                    />
+                </section>
+            ) : (
+                <p className="text-gray-500 dark:text-gray-400">No hay retiros para mostrar.</p>
+            )}
         </div>
     )
 }

@@ -16,8 +16,7 @@ const NotificationBell = () => {
     useEffect(() => {
         if (!socket) return;
         loadNotifications();
-        socket.on('admin', (data) => {
-            console.log(data);
+        socket.on('admin', () => {
             loadNotifications();
         });
         return () => {

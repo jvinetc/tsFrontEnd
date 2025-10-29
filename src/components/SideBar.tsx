@@ -53,7 +53,7 @@ const SideBar: React.FC<SideBarProps> = ({ sidebarOpen, darkMode, setDarkMode, s
                     <div className="p-2 flex flex-col items-center space-y-2">
                         <ImageButton />
                         <div className="text-center">
-                            <p className="font-semibold text-lg">{user?.firstName} {user?.lastName}`</p>
+                            <p className="font-semibold text-lg">{user?.firstName} {user?.lastName}</p>
                             <p className="text-sm text-gray-500 dark:text-gray-400">{user?.Role?.name?.toUpperCase()}</p>
                             <Link to="/logout" className="block hover:text-blue-200">Cerrar sesion</Link>
                         </div>
